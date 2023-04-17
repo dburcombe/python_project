@@ -1,5 +1,4 @@
 ---
-
 - name: Install python in target node with ansible
   hosts: python
   become: true
