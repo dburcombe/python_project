@@ -1,0 +1,15 @@
+---
+- name: Install python in target node with ansible
+  hosts: python
+  become: true
+  gather_facts: no
+  tasks:
+  - name: check python version
+    raw: 'cat < /home/dburc/ansible_tutorial/python/py_vers.sh' 
+
+
+  - name: install python
+    raw: 'cat < /home/dburc/script.sh'
+    args:
+      executable: /bin/bash
+    #when: ansible_python_version != 3.0  

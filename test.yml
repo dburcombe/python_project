@@ -1,0 +1,14 @@
+---
+
+- hosts: python
+  become: true
+  # gather_facts: no
+  tasks:
+    - name: update apt
+      raw: 'sudo apt update'
+      args:
+        executable: /bin/bash
+    - name: install python
+      raw: 'sudo apt install python3'
+      args:
+        executable: /bin/bash
