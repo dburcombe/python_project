@@ -5,7 +5,7 @@
   gather_facts: no
   tasks:
   - name: check python version
-    raw: 'cat < /home/dburc/ansible_tutorial/python/py_vers.sh' 
+    raw: 'cat < /home/dburc/project_work/python/py_vers.sh' 
 
 
   - name: install python
