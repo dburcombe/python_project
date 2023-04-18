@@ -1,5 +1,5 @@
 ---
-- name: Install python in target node with ansible
+- name: Installations
   hosts: python
   become: true
   gather_facts: no
@@ -7,9 +7,27 @@
   - name: check python version
     raw: 'cat < /home/dburc/project_work/python/py_vers.sh' 
 
-
   - name: install python
     raw: 'cat < /home/dburc/script.sh'
-    args:
-      executable: /bin/bash
-    #when: ansible_python_version != 3.0  
+      args:
+        executable: /bin/bash
+   
+      #  - name: install git
+      # apt:
+      # name: git
+      # state: latest
+  
+  - name: install java
+    apt:
+      name: openjdk-11-jdk
+      update_cache: yes
+
+      #  - name: install mongodb   
+      # apt:
+      # pkg:
+      #  - mongodb-org-server
+      #  - mongodb-org-mongos
+      #  - mongodb-org-shell
+      #  - mongodb-org-tools 
+      # state: latest
+      # update_cache: true     
