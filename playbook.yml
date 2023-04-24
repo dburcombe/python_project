@@ -1,0 +1,20 @@
+---
+- name: Installations
+  hosts: python
+  become: true
+  tasks:
+          
+- name: Install Required Build Packages on Ubuntu
+  apt:
+    name:
+      - autoconf
+      - automake
+      - gcc
+      - libc6
+      - libmcrypt-dev
+      - make
+      - libssl-dev
+      - wget
+    state: present
+    update_cache: yes  
+    

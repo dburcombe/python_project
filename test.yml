@@ -1,14 +1,64 @@
 ---
-
-- hosts: python
+- name: Installations
+  hosts: python
   become: true
-  # gather_facts: no
+  vars:
+    mongodb_version: 4.4
   tasks:
-    - name: update apt
-      raw: 'sudo apt update'
-      args:
-        executable: /bin/bash
-    - name: install python
-      raw: 'sudo apt install python3'
-      args:
-        executable: /bin/bash
+
+    - name: install git
+      apt:
+        name: git
+        state: latest
+    - name: Task -2 Install Java using Ansible
+      apt:
+        name: "{{ packages }}"
+        state: present
+      vars:
+        packages:
+           - openjdk-11-jdk
+
+    - name: MongoDB | Import the public key used by the package management system
+      apt_key: keyserver=keyserver.ubuntu.com id=7F0CEB10
+    - name: MongoDB | Create a list file
+      lineinfile: dest=/etc/apt/sources.list.d/mongodb-org-3.0.list line="deb http://repo.mongodb.org/apt/ubuntu precise/mongodb-org/3.0 multiverse" state=present create=yes
+    
+    - name: adding key
+      uri:
+         url: 'https://www.mongodb.org/static/pgp/server-4.4.asc'
+         method: GET
+      register: result
+
+      # - name: view key
+      # debug:
+      #  msg: "{{ result.stdout }}"
+
+      # - name: import the elasticsearch apt key
+      # apt_key:
+      #     url: 'https://www.mongodb.org/static/pgp/server-4.4.asc'
+      #     state: present
+      
+
+
+
+    - name: test
+      apt:
+        name: mongodb-org
+   
+    - name: MongoDB | Install the packages
+      apt:
+        name: "{{ item }}" 
+      loop:
+        - mongodb-org
+       # - mongodb-org-server
+       # - mongodb-org-shell
+       # - mongodb-org-mongos
+       # - mongodb-org-tools
+       # state: present
+       # update_cache: yes    
+          #      notify:
+          #        - restart mongodb
+  
+          #  handlers:
+          #    - name: restart mongodb
+          #      service: name=mongod state=restarted        

@@ -9,8 +9,8 @@
 
   - name: install python
     raw: 'cat < /home/dburc/script.sh'
-      args:
-        executable: /bin/bash
+    args:
+      executable: /bin/bash
    
       #  - name: install git
       # apt:
