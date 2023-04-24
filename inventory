@@ -1,7 +1,5 @@
 [python]
 20.87.214.18 
-20.164.36.156 
-20.87.219.179
 [python:vars]
 ansible_user=dburc
 ansible_connection=local
